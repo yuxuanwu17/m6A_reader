@@ -7,14 +7,10 @@ from pandas import DataFrame
 from keras.models import Sequential
 from keras.layers.core import Dropout, Reshape, Dense, Activation, Flatten
 from keras.layers.convolutional import Conv1D, MaxPooling1D
-from keras.optimizers import Adadelta, SGD, RMSprop;
-import keras.losses;
-from keras.constraints import maxnorm;
-from keras.utils import normalize, to_categorical
-from keras.layers.normalization import BatchNormalization
 from keras import regularizers
 from keras.callbacks import EarlyStopping, History, ModelCheckpoint
 from keras import backend as K
+from one_hot import seq_to_mat
 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -31,35 +27,11 @@ os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"  # see issue #152
 os.environ["CUDA_VISIBLE_DEVICES"] = "5"
 
 
-def seq_to_mat(seq):
-    seq_len = len(seq)
-    seq = seq.replace('A', '0')
-    seq = seq.replace('a', '0')
-    seq = seq.replace('C', '1')
-    seq = seq.replace('c', '1')
-    seq = seq.replace('G', '2')
-    seq = seq.replace('g', '2')
-    seq = seq.replace('T', '3')
-    seq = seq.replace('t', '3')
-    seq = seq.replace('U', '3')
-    seq = seq.replace('u', '3')
-    seq = seq.replace('N', '4')
-    seq = seq.replace('n', '4')
-    seq_code = np.zeros((4, seq_len), dtype='float16')
-    for i in range(seq_len):
-        if int(seq[i]) != 4:
-            seq_code[int(seq[i]), i] = 1
-        else:
-            seq_code[0:4, i] = np.tile(0.25, 4)
-    return np.transpose(seq_code)
-
-
 #####################
 ##Load the data######
 #####################
 def load_data(path):
     df = pd.read_csv(path, engine='python', error_bad_lines=False)
-
     train_All_1 = df.iloc[:, 2]
     test_all_1 = df.iloc[:, 3]
 
@@ -241,38 +213,31 @@ def prcurve(model, x_val, y_val, gene, condition, length):
 
 
 def main():
-    # gene = ['eif3a', 'YTHDF3','YTHDF1','YTHDF2']
-    # gene = ['YTHDF1']
-    gene = ['eif3a']
-    # gene = ['YTHDC1','YTHDC2']
-    # gene = ['YTHDC1']
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-gene', dest='gene', default=None, type=str, help='select the gene')
+    parser.add_argument('-condition', dest='condition', default=None, type=str, help='select full or exon')
+    parser.add_argument('-length', dest='length', default=None, type=str, help='specify the two ends sequence length 125/250/500/1000')
+    args = parser.parse_args()
 
-    # condition = ['Exon', 'Full']
-    condition = ['Full']
-    # length = ['1000', '500', '250', '125']
-    length = ['125']
+    ## assign the input value to variables
+    gene = args.gene
+    condition = args.condition
+    length = args.length
 
-    for x in gene:
-        # print(gene)
-        for y in condition:
-            # print(gene)
-            # print(condition)
-            for z in length:
-                # data_path = '/home/yuxuan/dp/longer_seq_data/YTHDF1/{}_{}_{}.csv'.format(x, y, z)
-                data_path = '/home/yuxuan/dp/longer_seq_data/{}_{}_{}.csv'.format(x, y, z)
-                print(data_path)
+    data_path = '/home/yuxuan/dp/longer_seq_data/{}_{}_{}.csv'.format(gene, condition, length)
 
-                x_train, x_test, x_val, y_test, y_train, y_val = load_data(data_path)
-                model = build_model(x_train)
-                history = compileModel(model, x_train, x_val, y_val, y_train, x, y, z)
-                lossplot(history, x, y, z)
-                auc = roc(model, x_val, y_val, x, y, z)
-                prauc = prcurve(model, x_val, y_val, x, y, z)
-                mcc = MCC(model, x_val, y_val)
-                acc = ACC(model, x_val, y_val)
-                results = np.array([auc, prauc, mcc, acc])
-                np.savetxt('/home/yuxuan/dp/CNN/longseq/{}_{}_{}(RNN)_test.csv'.format(x, y, z), results, delimiter=',',
-                           fmt='%.3f')
+    x_train, x_test, x_val, y_test, y_train, y_val = load_data(data_path)
+    model = build_model(x_train)
+    history = compileModel(model, x_train, x_val, y_val, y_train, gene, condition, length)
+    lossplot(history, gene,condition, length)
+    auc = roc(model, x_val, y_val, gene, condition, length)
+    prauc = prcurve(model, x_val, y_val, gene, condition, length)
+    mcc = MCC(model, x_val, y_val)
+    acc = ACC(model, x_val, y_val)
+    results = np.array([auc, prauc, mcc, acc])
+    np.savetxt('/home/yuxuan/dp/CNN/longseq/{}_{}_{}(RNN)_test.csv'.format(gene, condition, length), results, delimiter=',',
+               fmt='%.3f')
 
 
 if __name__ == '__main__':
