@@ -15,10 +15,10 @@ keras version 2.3.0, numpy, pandas, argparse
 ### Select the input genes
 You could select 6 genes, including YTHDC1-2, YTHDF1-3, EIF3A
 
-### Input for the sequence
+### Select the input length of the sequence
 You could choose 251, 501, 1001, 2001bp input length to compare the prediction performance 
 
-### The condition of the seqeunce full transcript (full) or mature RNA (exon)
+### Select the condition of the seqeunce, either full transcript (full) or mature RNA (exon)
 To minimize the bias in selecting the polyA RNAs, we prepared the full transcript data and mature RNA data. In detail, mature RNA data exclude the sites on the intron region while the full transcript data covered either the exon or intron region.
 
 ### Choose the CNN or CNN+RNN model
