@@ -1,20 +1,13 @@
 import matplotlib
-from sklearn.model_selection import train_test_split
 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import tensorflow as tf
 import numpy as np
-
 from tensorflow.python.keras.models import Sequential, Model
-import pandas as pd
 from deepexplain.tensorflow import DeepExplain
-
 import os
-from pandas import DataFrame
-
-from one_hot import seq_to_mat
 from load_data import load_data
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"  # see issue #152
