@@ -30,6 +30,24 @@ def build_model(x_train):
                                    metrics=['accuracy'])
     return one_filter_keras_model
 
+def build_model_CNN(x_train):
+    one_filter_keras_model = Sequential()
+    one_filter_keras_model.add(
+        Conv1D(filters=90, kernel_size=5, padding="valid", kernel_regularizer=regularizers.l2(0.01),
+               input_shape=x_train.shape[1::]))
+    one_filter_keras_model.add(Activation('relu'))
+    one_filter_keras_model.add(MaxPooling1D(pool_size=4, strides=2))
+    one_filter_keras_model.add(Dropout(0.25))
+
+    one_filter_keras_model.add(Flatten())
+    one_filter_keras_model.add(Dense(1))
+    one_filter_keras_model.add(Activation("sigmoid"))
+    one_filter_keras_model.summary()
+
+    one_filter_keras_model.compile(loss='binary_crossentropy', optimizer='adam',
+                                   metrics=['accuracy'])
+    return one_filter_keras_model
+
 
 def compileModel(model, x_train, x_val, y_val, y_train, gene, condition, length):
     model = model
