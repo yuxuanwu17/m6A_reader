@@ -17,7 +17,7 @@ You could select 6 genes, including YTHDC1-2, YTHDF1-3, EIF3A
 
 ### Select the input length of the sequence
 You could choose 251, 501, 1001, 2001bp input length to compare the prediction performance. 
-Due to the size limitation, i only upload some some small sized sequence as examples
+Due to the size limitation, i only upload some some small sized sequence as examples.
 Email me, if you want to apply all the data
 
 ### Select the condition of the seqeunce, either full transcript (full) or mature RNA (exon)
