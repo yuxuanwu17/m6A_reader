@@ -22,7 +22,7 @@ def main():
     # condition = ['Exon', 'Full']
     condition = ['Full']
     # length = ['1000', '500', '250', '125']
-    length = ['125', '250','500','1000']
+    length = ['125', '250', '500', '1000']
     mode = 'CNN+RNN'
 
     fpr = dict()
@@ -31,6 +31,7 @@ def main():
     precision = dict()
     recall = dict()
     average_precision = dict()
+    name = dict()
     epoch = 0
     lw = 2
 
@@ -60,26 +61,26 @@ def main():
                 ## ROC curve
                 fpr[epoch], tpr[epoch], _ = roc_curve(y_true=y_test, y_score=y_score)
                 roc_auc[epoch] = auc(fpr[epoch], tpr[epoch])
+                name[epoch]='{}_{}_{}'.format(x,y,z)
                 epoch = epoch + 1
 
     colors = cycle(['aqua', 'darkorange', 'cornflowerblue'])
     for i, color in zip(range(epoch), colors):
         plt.plot(fpr[i], tpr[i], color=color, lw=lw,
-                 label='ROC curve of class {} (area = {:.2f})'
-                       ''.format(i, roc_auc[i]))
+                 label='ROC curve of {}(area = {:.2f})'
+                       ''.format(name[i], roc_auc[i]))
+
 
     plt.plot([0, 1], [0, 1], 'k--', lw=lw)
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title('Some extension of Receiver operating characteristic to multi-class')
+    plt.title(' ROC plots of EIF3a Full transcripts in different length')
     plt.legend(loc="lower right")
     # plt.show()
     plt.savefig('/home/yuxuan/dp_m6a_org/plot/ROC(RNN_all).png',
                 format='png')
-
-
 
 
 if __name__ == '__main__':
