@@ -62,7 +62,7 @@ def main():
                 ## ROC curve
                 fpr[epoch], tpr[epoch], _ = roc_curve(y_true=y_test, y_score=y_score)
                 roc_auc[epoch] = auc(fpr[epoch], tpr[epoch])
-                name[epoch]='{}_{}_{}'.format(x.upper(),y,z)
+                name[epoch]='{}_{}_{}'.format(x.upper(),y,(int(z)*2+1))
                 epoch = epoch + 1
 
     ## ROC plotting
