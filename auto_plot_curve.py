@@ -77,13 +77,13 @@ def main():
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title(' ROC plots of EIF3A Full transcripts in different length')
+    plt.title(' ROC of EIF3A Full transcripts in different length')
     plt.legend(loc="lower right")
     # plt.show()
     plt.savefig('/home/yuxuan/dp_m6a_org/plot/ROC(RNN_all).png',
                 format='png')
     plt.cla()
-    plt.figure(figsize=(7, 8))
+    # plt.figure(figsize=(7, 8))
 
     ## PR curve plotting
     colors = cycle(['navy', 'turquoise', 'darkorange', 'cornflowerblue', 'teal'])
@@ -93,7 +93,7 @@ def main():
     for i, color in zip(range(epoch), colors):
         l, = plt.plot(recall[i], precision[i], color=color, lw=2)
         lines.append(l)
-        labels.append('Precision-recall for {0} (area = {1:0.2f})'
+        labels.append('PRAUC for {0} (area = {1:0.2f})'
                       ''.format(name[i], average_precision[i]))
 
 
@@ -104,7 +104,7 @@ def main():
     plt.xlabel('Recall')
     plt.ylabel('Precision')
     plt.title('Precision-Recall curve to EIF3A Full transcript in different lengths')
-    plt.legend(lines, labels, loc=(0, -.38), prop=dict(size=14))
+    plt.legend(lines, labels, loc="lower right")
     plt.savefig('/home/yuxuan/dp_m6a_org/plot/PR_Curve(RNN_all).png',
                 format='png')
 
