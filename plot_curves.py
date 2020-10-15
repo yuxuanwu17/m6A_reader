@@ -4,7 +4,7 @@ from sklearn.metrics import precision_recall_curve, roc_curve
 from sklearn.metrics import average_precision_score, auc
 from load_data import load_data
 from model import build_model,compileModel,build_model_CNN
-
+from scipy import interpolate
 
 def main():
     import argparse
@@ -28,19 +28,20 @@ def main():
 
     if mode =='CNN+RNN':
         model = build_model(x_test)
+        checkpoint_path = '/home/yuxuan/dp/model/{}_{}_{}_CRNNmodel_test.h5'.format(gene, condition, length)
     else:
         model =build_model_CNN(x_test)
+        checkpoint_path = '/home/yuxuan/dp/model/{}_{}_{}_best_model.h5'.format(gene, condition, length)
+        print(checkpoint_path)
 
-    checkpoint_path = '/home/yuxuan/dp/model/{}_{}_{}_CRNNmodel_test.h5'.format(gene, condition, length)
     model.load_weights(checkpoint_path)
-
     y_score = model.predict(x_test)
-
-    precision, recall, _ = precision_recall_curve(y_true=y_test, y_score=y_score)
+    precision, recall, _ = precision_recall_curve(y_true=y_test, probas_pred=y_score)
     average_precision = average_precision_score(y_true=y_test, y_score=y_score)
+
+## ROC curve
     fpr, tpr, _ = roc_curve(y_true=y_test, y_score=y_score)
     roc_auc = auc(fpr, tpr)
 
-
-
-
+if __name__ == '__main__':
+    main()
