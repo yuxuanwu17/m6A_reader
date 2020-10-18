@@ -20,7 +20,7 @@ def main():
     # gene = ['YTHDC1']
 
     # condition = ['Exon', 'Full']
-    condition = ['Full']
+    condition = ['Exon']
     # length = ['1000', '500', '250', '125']
     length = ['125', '250', '500', '1000']
     mode = 'CNN+RNN'
@@ -77,10 +77,10 @@ def main():
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title(' ROC of EIF3A Full transcripts in different length')
+    plt.title(' ROC of EIF3A mature transcripts in different length')
     plt.legend(loc="lower right")
     # plt.show()
-    plt.savefig('/home/yuxuan/dp_m6a_org/plot/ROC(RNN_all).png',
+    plt.savefig('/home/yuxuan/dp_m6a_org/plot/ROC(RNN_all)_exon.png',
                 format='png')
     plt.cla()
     # plt.figure(figsize=(7, 8))
@@ -103,9 +103,9 @@ def main():
     plt.ylim([0.0, 1.05])
     plt.xlabel('Recall')
     plt.ylabel('Precision')
-    plt.title('Precision-Recall curve to EIF3A Full transcript in different lengths')
+    plt.title('Precision-Recall curve to EIF3A mature transcript in different lengths')
     plt.legend(lines, labels, loc="lower right")
-    plt.savefig('/home/yuxuan/dp_m6a_org/plot/PR_Curve(RNN_all).png',
+    plt.savefig('/home/yuxuan/dp_m6a_org/plot/PR_Curve(RNN_all)_exon.png',
                 format='png')
 
 
