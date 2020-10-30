@@ -2,6 +2,13 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="Always" serverName="yuxuan@10.7.6.98:22 password">
     <serverData>
+      <paths name="kl">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/yuxuan" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="yuxuan@10.7.6.98:22 password">
         <serverdata>
           <mappings>
