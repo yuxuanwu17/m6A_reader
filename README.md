@@ -56,7 +56,7 @@ the Receiver Operating Characteristic (ROC) curve and Precision-Recall curve for
 
 Here, we mainly opted EIF3A dataset for easy demonstration in this paper. More details of the other five datasets could be achieved in the supplementary file.
 
-![Alt text](https://github.com/yuxuanwu17/m6A_reader/blob/master/plot/rocs.png)
+![Alt text](https://github.com/yuxuanwu17/m6A_reader/blob/master/plot/rocs_update.png)
 
 **Figure 4** (A) Compared the ROC curve and the regarding AUROC of mature and full transcript of EIF3A under CNN+RNN model in various sequence lengths. (B) Compared the PR curve and the regarding PRAUC of mature and full transcript of EIF3A under CNN+RNN model in various sequence lengths. 
 
