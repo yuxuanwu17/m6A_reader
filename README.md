@@ -33,10 +33,10 @@ To validate the model performance, four commonly used performance metrics, inclu
 
 where TP and TN are denoted as True Positive and True Negative, FN and FT are denoted as False Negative and False Positive. To sum up, the higher the performance metrics value, the more accurate the prediction. Additionally, we compared the performance with the previous research using machine learning method, the combination of CNN + RNN frameworks and the CNN framework only to determine the optimal choice.
 
-We also exploited DeepExplain's epsilon-LRP method (gradient-based) to calculate the contribution in each feature input. With the assistance of this approach, we could rank the nucleotides’ significance in identifying the m6A readers’ substrates. Moreover, we extend the sequence upstream/downstream length from 50bp to 250bp, hoping to cover more information in determining each nucleotide contribution. 4 Results and discussion
+We also exploited DeepExplain's epsilon-LRP method (gradient-based) to calculate the contribution in each feature input. With the assistance of this approach, we could rank the nucleotides’ significance in identifying the m6A readers’ substrates. Moreover, we extend the sequence upstream/downstream length from 50bp to 250bp, hoping to cover more information in determining each nucleotide contribution. 
 
 
-## Results
+## Results and Discussion
 
 ### Performance comparison 
 
@@ -72,7 +72,7 @@ The results showed that if those positions 34bp, 59bp, 11bp, 58bp, 27bp, 49bp, 7
 
 **Figure 5** Feature importance scores in EIF3A full transcript prediction. We both extracted upstream/downstream 50bp and upstream/downstream 250 bp of the sequence to rank the contribution of each nucleotide in determining the binding site. In each position, the higher score it gains, the higher contribution towards the binding sites.
 
-#How to use this file?
+# How to use this file?
 
 ## Prerequisite packages
 keras version 2.3.0, numpy, pandas, argparse
