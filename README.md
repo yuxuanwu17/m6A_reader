@@ -1,4 +1,7 @@
 # Prediction of m6A Reader substrate sites using deep convolutional and recurrent neural network  
+
+The full transcript could be accessed in https://github.com/yuxuanwu17/m6A_reader/blob/master/Artical/dp_final.docx
+
 ## Abstract
 N6-methyladenosine (m6A) is the most prevalent post-transcriptional modification in mRNA since it could regulate some significant biological functions with the binding of some m6A reader proteins. Multiple readers exist in the human genome, however, the binding specificity was not clarified due to the limited wet experiments on this topic. Therefore, we devised a deep learning approach which incorporated CNN and RNN frameworks together to predict the epitranscriptome-wide targets of six m6A reader proteins (YTHDF1-3, YTHDC1-2, EIF3A). We also utilized layer-wise relevance calculation to obtain contribution of each input feature. Our model achieved state-of-the-art performance with the average AUROC of 0.942 in EIF3A full transcript, compared with 0.929 in CNN-only framework and 0.817 in Support Vector Machine (SVM) method under same condition. Besides, we identified the optimal sequence length (1001bp) in the m6A reader substrate prediction. The results provide new insight into epitranscriptome target prediction and functional characterization of m6A readers.
 
