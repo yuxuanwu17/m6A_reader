@@ -2,7 +2,11 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="Always">
     <serverData>
+<<<<<<< HEAD
       <paths name="yuxuan@10.7.6.98:22">
+=======
+      <paths name="yuxuan@10.7.6.98:22 password">
+>>>>>>> 7fd6c9748f5b2d259022efdcc092b743a4e7e5f3
         <serverdata>
           <mappings>
             <mapping deploy="/dp_m6a_org" local="$PROJECT_DIR$" web="/" />
